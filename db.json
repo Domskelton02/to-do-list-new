@@ -1,1 +1,46 @@
-{}
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "jon9000",
+      "password": "password9000"
+    },
+    {
+      "id": 2,
+      "username": "sally3000",
+      "password": "password3000"
+    }
+  ],
+
+  "lists": [
+    {
+      "id": 1,
+      "title": "To do"
+    },
+    {
+      "id": 2,
+      "title": "Doing"
+    },
+    {
+      "id": 3,
+      "title": "Done"
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "title": "Task 1",
+      "listId": 1
+    },
+    {
+      "id": 2,
+      "title": "Task 2",
+      "listId": 2
+    },
+    {
+      "id": 3,
+      "title": "Task 3",
+      "listId": 3
+    }
+  ]
+}
