@@ -1,4 +1,5 @@
-// src/types/types.ts
+import { ReactNode } from 'react';
+
 
 // User type
 export interface IUser {
@@ -13,6 +14,10 @@ export interface IUser {
     user: IUser | null;
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
+  }
+
+  export interface IAuthProviderProps {
+    children: ReactNode;
   }
   
   // List type

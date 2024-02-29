@@ -1,22 +1,35 @@
 // src/context/AuthContext.tsx
-import React, { createContext, useState } from 'react';
-import { AuthContextType } from '../types/types';
+import { createContext, useState, FC } from 'react';
+import { IUser, IAuthContext, IAuthProviderProps } from '../types/types';
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
-export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState(null); // You'll want to replace 'null' with a proper User state
+export const AuthProvider: FC<IAuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<IUser | null>(null);
 
-  const login = async (username: string, password: string) => {
-    // Here you'd make an API call to log in the user
-    console.log('Login attempt:', username, password);
-    // On successful login:
-    setUser({ id: 1, username, password }); // Replace with actual user data from the response
+  const login: IAuthContext['login'] = async (username, password) => {
+    try {
+      const response = await fetch('http://localhost:5000/users?username=' + username);
+      const [user] = await response.json();
+
+      if (user && user.password === password) {
+        setUser(user);
+      } else {
+        alert('Invalid username or password');
+        setUser(null);
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw new Error('Login failed');
+    }
   };
 
-  // Provide the login function to the context
+  const logout: IAuthContext['logout'] = () => {
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
