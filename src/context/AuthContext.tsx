@@ -1,4 +1,3 @@
-// src/context/AuthContext.tsx
 import { createContext, useState, FC } from 'react';
 import { IUser, IAuthContext, IAuthProviderProps } from '../types/types';
 

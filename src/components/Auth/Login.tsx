@@ -4,13 +4,13 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { AuthContext } from '../../context/AuthContext'; // Correct import path for AuthContext
-import { IAuthContext } from '../../types/types'; // Correct import path for types
+import { AuthContext } from '../../context/AuthContext';
+import { IAuthContext } from '../../types/types';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const authContext = useContext(AuthContext) as IAuthContext; // Use AuthContextType for proper typing
+  const authContext = useContext(AuthContext) as IAuthContext;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,10 +19,8 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      // Use the login function from your AuthContext
       await authContext.login(username, password);
     } catch (error) {
-      // If there is an error, handle it here
       alert('Failed to log in. Please check your credentials and try again.');
     }
   };
