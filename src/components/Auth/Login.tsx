@@ -4,13 +4,13 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { AuthContextType } from '../../types/types'; // Adjust the path as necessary
-import { AuthContext } from '../context/AuthContext'; // Ensure this is the correct path
+import { AuthContext } from '../../context/AuthContext'; // Correct import path for AuthContext
+import { IAuthContext } from '../../types/types'; // Correct import path for types
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const authContext = useContext(AuthContext) as AuthContextType;
+  const authContext = useContext(AuthContext) as IAuthContext; // Use AuthContextType for proper typing
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,15 +34,15 @@ const Login: React.FC = () => {
           Sign In
         </Typography>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <TextField
+          <TextField
             label="Username"
             variant="outlined"
             fullWidth
             value={username}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             className="bg-white"
-        />
-        <TextField
+          />
+          <TextField
             label="Password"
             type="password"
             variant="outlined"
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
             value={password}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             className="bg-white"
-        />
+          />
           <Box className="flex justify-center mt-4">
             <Button
               type="submit"
