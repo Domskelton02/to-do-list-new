@@ -4,16 +4,13 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { AuthContext } from '../context/AuthContext';
-import { AuthContext } from '../../types/types';
+import { AuthContextType } from '../../types/types'; // Adjust the path as necessary
+import { AuthContext } from '../context/AuthContext'; // Ensure this is the correct path
 
-
-interface LoginProps {}
-
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext) as AuthContextType;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,9 +19,10 @@ const Login: React.FC<LoginProps> = () => {
       return;
     }
     try {
-      // Assuming the 'login' function exists in your AuthContext
-      await AuthContextType.login(username, password);
+      // Use the login function from your AuthContext
+      await authContext.login(username, password);
     } catch (error) {
+      // If there is an error, handle it here
       alert('Failed to log in. Please check your credentials and try again.');
     }
   };
@@ -37,24 +35,22 @@ const Login: React.FC<LoginProps> = () => {
         </Typography>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <TextField
-  label="Username"
-  variant="outlined"
-  fullWidth
-  value={username}
-  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-  className="bg-white"
-/>
-
-<TextField
-  label="Password"
-  type="password"
-  variant="outlined"
-  fullWidth
-  value={password}
-  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-  className="bg-white"
-/>
-
+            label="Username"
+            variant="outlined"
+            fullWidth
+            value={username}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            className="bg-white"
+        />
+        <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            className="bg-white"
+        />
           <Box className="flex justify-center mt-4">
             <Button
               type="submit"
