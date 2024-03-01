@@ -11,7 +11,6 @@
       "password": "password3000"
     }
   ],
-
   "lists": [
     {
       "id": 1,
@@ -27,20 +26,25 @@
     }
   ],
   "cards": [
+  ],
+  "defaultCards": [
     {
-      "id": 1,
-      "title": "Task 1",
-      "listId": 1
+      "title": "Welcome to Our App!",
+      "description": "This is your first task.",
+      "listId": 1,
+      "status": "incomplete"
     },
     {
-      "id": 2,
-      "title": "Task 2",
-      "listId": 2
+      "title": "Create a new card",
+      "description": "Try adding a new card to any list.",
+      "listId": 1,
+      "status": "incomplete"
     },
     {
-      "id": 3,
-      "title": "Task 3",
-      "listId": 3
+      "title": "Invite your team",
+      "description": "Collaboration is more fun!",
+      "listId": 1,
+      "status": "incomplete"
     }
   ]
 }

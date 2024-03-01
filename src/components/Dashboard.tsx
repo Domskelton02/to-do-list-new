@@ -10,14 +10,15 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (user) {
       Promise.all([
-        fetch(`/lists?userId=${user.id}`).then((res) => res.json()),
-        fetch(`/cards?userId=${user.id}`).then((res) => res.json()),
+        fetch(`http://localhost:5000/lists?userId=${user.id}`).then((res) => res.json()),
+        fetch(`http://localhost:5000/cards?userId=${user.id}`).then((res) => res.json()),
       ]).then(([userLists, userCards]) => {
         setLists(userLists);
         setCards(userCards);
       });
     }
   }, [user]);
+  
 
   if (!user) {
     return <Navigate to="/login" />;

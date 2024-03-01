@@ -34,10 +34,10 @@ export interface IUser {
     title: string;
     description?: string;
     listId: number;
-    // You might want to include a 'status' or 'userId' if needed
-    status?: 'incomplete' | 'inprogress' | 'complete';
-    // userId?: number;
+    status: 'incomplete' | 'inProgress' | 'pending'; // Updated status options
+    // userId?: number; // Include if cards are user-specific
   }
+  
   
   // Type for any other entities or operations
   // For example, if you have a function to add a card, you might define a type for it:
