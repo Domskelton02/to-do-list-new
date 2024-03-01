@@ -1,12 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
   const { user, logout } = useContext(AuthContext);
+  const [lists, setLists] = useState([]);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      Promise.all([
+        fetch(`/lists?userId=${user.id}`).then((res) => res.json()),
+        fetch(`/cards?userId=${user.id}`).then((res) => res.json()),
+      ]).then(([userLists, userCards]) => {
+        setLists(userLists);
+        setCards(userCards);
+      });
+    }
+  }, [user]);
 
   if (!user) {
-    // If there is no user logged in, redirect to the login page
     return <Navigate to="/login" />;
   }
 
@@ -17,13 +30,22 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <h1>Welcome, {user.username}</h1>
-      {/* Example of a placeholder item list */}
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
-      {/* Logout button */}
+      <div>
+        <h2>Your Lists:</h2>
+        <ul>
+          {lists.map((list) => (
+            <li key={list.id}>{list.title}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Your Cards:</h2>
+        <ul>
+          {cards.map((card) => (
+            <li key={card.id}>{card.title}</li>
+          ))}
+        </ul>
+      </div>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
